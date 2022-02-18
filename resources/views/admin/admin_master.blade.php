@@ -9,6 +9,9 @@
     <link rel="icon" href="{{ asset('backend-admin/images/favicon.ico') }}">
 
     <title>My Shop - Dashboard</title>
+
+    <!-- Jquery CDN Link-->  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
   	<!-- Vendors Style-->
   	<link rel="stylesheet" href="{{ asset('backend-admin/css/vendors_css.css') }}">
@@ -17,11 +20,12 @@
   	<link rel="stylesheet" href="{{ asset('backend-admin/css/style.css') }}">
   	<link rel="stylesheet" href="{{ asset('backend-admin/css/skin_color.css') }}">
 
-    <!-- Jquery CDN Link-->  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('backend-admin/css/toastr.min.css') }}">
+
+    <!-- dataTables cdn link -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
      
   </head>
 
@@ -57,17 +61,25 @@
 	 
 	<!-- Vendor JS -->
 	<script src="{{ asset('backend-admin/js/vendors.min.js') }}"></script>
-  <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>	
+    <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>	
 	<script src="{{ asset('assets/vendor_components/easypiechart/dist/jquery.easypiechart.js') }}"></script>
 	<script src="{{ asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>
 	<script src="{{ asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
+
+    <!-- Template Data Table JS -->   
+    <!-- <script src="{{ asset('/assets/vendor_components/datatable/datatables.js') }}"></script>
+    <script src="{{ asset('backend-admin/js/pages/data-table.js') }}"></script> -->
 	
 	<!-- Sunny Admin App -->
 	<script src="{{ asset('backend-admin/js/template.js') }}"></script>
 	<script src="{{ asset('backend-admin/js/pages/dashboard.js') }}"></script>
 
-  <!-- Latest toastir JavaScript -->
-  <script src="{{ asset('backend-admin/js/toastr.min.js') }}"></script>
+    <!-- dataTables cdn link -->
+    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Latest toastir JavaScript -->
+    <script src="{{ asset('backend-admin/js/toastr.min.js') }}"></script>
 
 	<script>
     @if(Session::has('success'))
@@ -83,6 +95,56 @@
         toastr.error("{{ Session::get('error') }}");
     @endif 
   </script>
+
+  <!--  Sweet Alert CDN Link -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+      $(function(){
+        $(document).on('click', '#delete', function(e){
+            e.preventDefault();
+            var link = $(this).attr("href");
+
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+              }
+            })
+            
+        });
+      });
+  </script>
 	
+
+    <!--**********************************
+        Input Image File Scripts
+    ***********************************-->
+
+    <script>
+        $(document).ready(function(){
+            $('#image').change(function(event){
+                
+                var reader = new FileReader();
+                
+                reader.onload = function(event){
+                    $('#showImage').attr('src',event.target.result);
+                }
+                
+                reader.readAsDataURL(event.target.files['0']);
+            });
+        });
+    </script>
 </body>
 </html>

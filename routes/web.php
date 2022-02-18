@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BrandContoller;
 
 use App\Http\Controllers\Frontend\IndexController;;
 
@@ -33,7 +34,6 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
 });
 
-
 //Admin Dashboard Using admin Guard
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
@@ -58,10 +58,21 @@ Route::post('/user/update/password', [IndexController::class, 'UserUpdatePasswor
 
 //User Dashboard Using Default web Guard/
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+
     $id = Auth::user()->id;
     $user = User::find($id);
     return view('dashboard')->with('user',$user);
 })->name('dashboard');
+
+//Admin Brand All Route
+Route::group(['prefix'=>'brand'], function(){
+
+    Route::get('/view', [BrandContoller::class, 'BrandView'])->name('all.brand');
+    Route::post('/store', [BrandContoller::class, 'BrandStore'])->name('brand.store');
+    Route::post('/update/{id}', [BrandContoller::class, 'BrandUpdate'])->name('brand.update');
+    Route::get('/delete/{id}', [BrandContoller::class, 'BrandDelete'])->name('brand.delete');
+
+});
 
 
 Route::get('/test', function(){
