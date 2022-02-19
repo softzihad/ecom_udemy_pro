@@ -4,8 +4,10 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandContoller;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 
-use App\Http\Controllers\Frontend\IndexController;;
+use App\Http\Controllers\Frontend\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,20 @@ Route::group(['prefix'=>'brand'], function(){
     Route::post('/update/{id}', [BrandContoller::class, 'BrandUpdate'])->name('brand.update');
     Route::get('/delete/{id}', [BrandContoller::class, 'BrandDelete'])->name('brand.delete');
 
+});
+
+//Admin Category All Route
+Route::group(['prefix'=>'category'], function(){
+
+    Route::get('view', [CategoryController::class, 'CategoryView'])->name('all.category');
+    Route::post('/store', [CategoryController::class, 'CategoryStore'])->name('category.store');
+    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+    Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
+    
+    Route::get('sub/view', [SubCategoryController::class, 'SubCategoryView'])->name('all.subcategory');
+    Route::post('sub/store', [SubCategoryController::class, 'SubCategoryStore'])->name('subcategory.store');
+    Route::post('sub/update/{id}', [SubCategoryController::class, 'SubCategoryUpdate'])->name('subcategory.update');
+    Route::get('sub/delete/{id}', [SubCategoryController::class, 'SubCategoryDelete'])->name('subcategory.delete');
 });
 
 

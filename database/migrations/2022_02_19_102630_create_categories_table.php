@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('brand_name_en')->nullable();
-            $table->string('brand_name_bng')->nullable();
-            $table->string('brand_slug_en')->nullable();
-            $table->string('brand_slug_bng')->nullable();
-            $table->string('brand_image')->nullable();
+            $table->string('category_name_en')->nullable();
+            $table->string('category_name_bng')->nullable();
+            $table->string('category_slug_en')->nullable();
+            $table->string('category_slug_bng')->nullable();
+            $table->string('category_icon')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('categories');
     }
 };
