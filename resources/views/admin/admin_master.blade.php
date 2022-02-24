@@ -9,9 +9,6 @@
     <link rel="icon" href="{{ asset('backend-admin/images/favicon.ico') }}">
 
     <title>My Shop - Dashboard</title>
-
-    <!-- Jquery CDN Link-->  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
   	<!-- Vendors Style-->
   	<link rel="stylesheet" href="{{ asset('backend-admin/css/vendors_css.css') }}">
@@ -26,6 +23,9 @@
 
     <!-- dataTables cdn link -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+
+    <!-- Jquery -->
+    <script src="{{ asset('backend-admin/js/jquery-3.6.0.min.js') }}"></script>
      
   </head>
 
@@ -58,7 +58,8 @@
 </div>
 <!-- ./wrapper -->
   	
-	 
+    <!-- Jquery -->
+	<script src="{{ asset('backend-admin/js/jquery-3.6.0.min.js') }}"></script>
 	<!-- Vendor JS -->
 	<script src="{{ asset('backend-admin/js/vendors.min.js') }}"></script>
     <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>	
@@ -67,16 +68,20 @@
 	<script src="{{ asset('assets/vendor_components/apexcharts-bundle/dist/apexcharts.js') }}"></script>
 
     <!-- Template Data Table JS -->   
-    <!-- <script src="{{ asset('/assets/vendor_components/datatable/datatables.js') }}"></script>
-    <script src="{{ asset('backend-admin/js/pages/data-table.js') }}"></script> -->
+    <script src="{{ asset('assets/vendor_components/datatable/datatables.js') }}"></script>
+    <script src="{{ asset('backend-admin/js/pages/data-table.js') }}"></script>
 	
 	<!-- Sunny Admin App -->
 	<script src="{{ asset('backend-admin/js/template.js') }}"></script>
 	<script src="{{ asset('backend-admin/js/pages/dashboard.js') }}"></script>
 
-    <!-- dataTables cdn link -->
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Tag Input JS -->
+    <script src="{{ asset('assets/vendor_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js') }}"></script>
+
+    <!-- Form CK Editors JS -->
+    <script src="{{ asset('assets/vendor_components/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/vendor_plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js') }}"></script>
+    <script src="{{ asset('backend-admin/js/pages/editor.js') }}"></script>
 
     <!-- Latest toastir JavaScript -->
     <script src="{{ asset('backend-admin/js/toastr.min.js') }}"></script>

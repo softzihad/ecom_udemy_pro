@@ -3,7 +3,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-	<div class="col-8">
+	<div class="col-md-8">
 
 		<div class="box">
 			<div class="box-header with-border">
@@ -76,14 +76,14 @@
 												@enderror
 											</div>
 											<div class="text-xs-right">
-												<button type="submit" class="btn btn-primary">Update</button>
+												<input type="submit" class="btn btn-rounded btn-info" value="Update">
 											</div>
 										</form>
 						      </div>
 
 						      <!-- Modal footer -->
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+						        <a type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</a>
 						      </div>
 
 						    </div>
@@ -101,7 +101,7 @@
 	<!-- /.col -->
 
 	<!-- Add Category Form Here -->
-	<div class="col-4">
+	<div class="col-md-4">
 
 		<div class="box">
 			<div class="box-header with-border">
@@ -139,7 +139,7 @@
 						@enderror
 					</div>
 					<div class="text-xs-right">
-						<button type="submit" class="btn btn-primary">Add New</button>
+						<input type="submit" class="btn btn-rounded btn-info" value="Add New">
 					</div>
 				</form>
 			</div>
