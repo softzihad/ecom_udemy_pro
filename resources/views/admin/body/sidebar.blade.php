@@ -21,8 +21,8 @@
       <!-- sidebar menu-->
       <ul class="sidebar-menu" data-widget="tree">  
 		  
-  		  <li class="{{ ($route == 'dashboard') ? 'active' : '' }}">
-          <a href="index.html">
+  		  <li class="{{ ($route == 'admin.dashboard') ? 'active' : '' }}">
+          <a href="{{ route('admin.dashboard') }}">
             <i data-feather="pie-chart"></i>
 			       <span>Dashboard</span>
           </a>
@@ -58,7 +58,7 @@
 		
         <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
           <a href="#">
-            <i data-feather="file"></i>
+            <i  class="fa fa-shopping-cart"></i>
             <span>Product</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -66,8 +66,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="{{ ($route == 'add.product') ? 'active' : '' }}"><a href="{{ route('add.product') }}"><i class="ti-more"></i>Add Product</a></li>
-            <li><a href="invoice.html"><i class="ti-more"></i>Invoice</a></li>
-            <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
+            <li class="{{ ($route == 'product.view') ? 'active' : '' }}"><a href="{{ route('product.view') }}"><i class="ti-more"></i>All Products</a></li>
             <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
             <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>
           </ul>

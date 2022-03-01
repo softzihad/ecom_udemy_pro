@@ -40,7 +40,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 //Admin Dashboard Using admin Guard
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('admin.dashboard')->middleware('auth:admin');
 
 //Admin All Route Here....
 Route::get('/admin/logout', 'AdminController@destroy')->name('admin.logout');
@@ -106,7 +106,17 @@ Route::group(['prefix'=>'category'], function(){
 Route::group(['prefix'=>'product'], function(){
 
     //Route::get('/view', [ProductController::class, 'ProductView'])->name('all.category');
+    Route::get('/view', [ProductController::class, 'ProductView'])->name('product.view');
     Route::get('/add', [ProductController::class, 'AddProduct'])->name('add.product');
+    Route::post('/store', [ProductController::class, 'ProductStore'])->name('product.store');
+    Route::get('/edit/{id}', [ProductController::class, 'ProductEdit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'ProductUpdate'])->name('product.update');
+    Route::post('/image/update', [ProductController::class, 'MultiImageUpdate'])->name('update-product-image');
+    Route::post('/thambnail/update', [ProductController::class, 'ThambnailImageUpdate'])->name('update-product-thambnail');
+    Route::get('/multiimg/delete/{id}', [ProductController::class, 'MultiImageDelete'])->name('product.multiimg.delete');
+    Route::get('/inactive/{id}', [ProductController::class, 'ProductInactive'])->name('product.inactive');
+    Route::get('/active/{id}', [ProductController::class, 'ProductActive'])->name('product.active');
+    Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
 });
 
 

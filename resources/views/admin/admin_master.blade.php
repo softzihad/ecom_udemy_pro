@@ -21,9 +21,6 @@
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('backend-admin/css/toastr.min.css') }}">
 
-    <!-- dataTables cdn link -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
-
     <!-- Jquery -->
     <script src="{{ asset('backend-admin/js/jquery-3.6.0.min.js') }}"></script>
      
