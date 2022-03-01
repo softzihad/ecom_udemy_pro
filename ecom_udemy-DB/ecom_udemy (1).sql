@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2022 at 06:29 PM
+-- Generation Time: Mar 01, 2022 at 03:29 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.15
 
@@ -45,7 +45,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'admin123', 'admin@example.com', '2022-02-12 13:32:49', '$2y$10$S/Wii97KIomZh2ymLrt6QerQ4Hk1Q1hJrd8ibLVlri/87HhGmY2rG', 'TTMgGEP6Xm6GERTrIV3Os7zrLxs9U9k0PohHCsVoqkPM9qGn1rJNcakhi0Ta', NULL, 'uploads/admin-images/1644863611avatar-1.png', '2022-02-12 13:32:49', '2022-02-15 10:05:08');
+(1, 'admin123', 'admin@example.com', '2022-02-12 13:32:49', '$2y$10$S/Wii97KIomZh2ymLrt6QerQ4Hk1Q1hJrd8ibLVlri/87HhGmY2rG', 'rf94ex59EwrZnGCD6xUyV3NomD5Mva0JcdUSEECRzl4CLrG5vOZjGJ8QEgJb', NULL, 'uploads/admin-images/1644863611avatar-1.png', '2022-02-12 13:32:49', '2022-02-15 10:05:08'),
+(2, 'adminAnother', 'admin1@example.com', '2022-02-12 13:32:49', '$2y$10$S/Wii97KIomZh2ymLrt6QerQ4Hk1Q1hJrd8ibLVlri/87HhGmY2rG', 'nCmSGbimf8nP0r3fkYjUYIJdLFJ8l0PFn1z9NcXQtsJNmSFaaF6lHS7UxQqF', NULL, 'uploads/admin-images/1644863611avatar-1.png', '2022-02-12 13:32:49', '2022-02-15 10:05:08');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,7 @@ INSERT INTO `brands` (`id`, `brand_name_en`, `brand_name_bng`, `brand_slug_en`, 
 (3, 'Vivo', 'ভিভো', 'Vivo', 'ভিভো', 'uploads/brand/1645177335vivo-Phone-logo.png', '2022-02-18 03:42:15', '2022-02-24 10:47:26'),
 (4, 'Samsung', 'স্যামসাং', 'Samsung', 'স্যামসাং', 'uploads/brand/1645192710Samsung_logo.png', '2022-02-18 04:33:04', '2022-02-24 10:47:09'),
 (5, 'Xiaomi', 'শাওমি', 'Xiaomi', 'শাওমি', 'uploads/brand/1645192796xiaomi.png', '2022-02-18 05:42:52', '2022-02-24 10:47:50'),
-(6, 'Huawei', 'হুয়াওয়ে', 'Huawei', 'হুয়াওয়ে', 'uploads/brand/1645192820Huawei-Logo.wine.png', '2022-02-18 05:50:18', '2022-02-24 10:46:54');
+(6, 'Huawei', 'হুয়াওয়ে', 'Huawei', 'হুয়াওয়ে', 'uploads/brand/1645192820Huawei-Logo.wine.png', '2022-02-18 05:50:18', '2022-03-01 07:05:25');
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2022_02_19_125207_create_sub_categories_table', 5),
 (11, '2022_02_19_190622_create_sub_sub_categories_table', 6),
 (12, '2022_02_23_153447_create_products_table', 7),
-(13, '2022_02_23_155045_create_multi_imgs_table', 7);
+(13, '2022_02_23_155045_create_multi_imgs_table', 7),
+(14, '2022_03_01_113802_create_sliders_table', 8);
 
 -- --------------------------------------------------------
 
@@ -163,6 +165,19 @@ CREATE TABLE `multi_imgs` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `multi_imgs`
+--
+
+INSERT INTO `multi_imgs` (`id`, `product_id`, `photo_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 'uploads/products/multi-image/1725842249744436.jpeg', '2022-02-25 06:09:02', '2022-02-26 10:03:48'),
+(4, 2, 'uploads/products/multi-image/1725737292069306.jpeg', '2022-02-25 06:15:32', NULL),
+(5, 2, 'uploads/products/multi-image/1725737292250511.jpeg', '2022-02-25 06:15:32', NULL),
+(6, 2, 'uploads/products/multi-image/1725737292419490.jpeg', '2022-02-25 06:15:32', NULL),
+(10, 4, 'uploads/products/multi-image/1726096197811161.jpeg', '2022-03-01 05:20:11', '2022-03-01 05:20:11'),
+(11, 4, 'uploads/products/multi-image/1726096197979780.jpeg', '2022-03-01 05:20:11', '2022-03-01 05:20:11'),
+(12, 4, 'uploads/products/multi-image/1726096198150107.jpeg', '2022-03-01 05:20:12', '2022-03-01 05:20:12');
 
 -- --------------------------------------------------------
 
@@ -207,23 +222,23 @@ CREATE TABLE `products` (
   `subcategory_id` int(11) NOT NULL,
   `subsubcategory_id` int(11) NOT NULL,
   `product_name_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_name_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_name_bng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_slug_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_slug_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_slug_bng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_qty` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_tags_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_tags_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_tags_bng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_size_en` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_size_hin` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_size_bng` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_color_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_color_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_color_bng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `selling_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `discount_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `short_descp_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `short_descp_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `long_descp_en` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `long_descp_hin` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_descp_bng` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `long_descp_en` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `long_descp_bng` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_thambnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hot_deals` int(11) DEFAULT NULL,
   `featured` int(11) DEFAULT NULL,
@@ -233,6 +248,15 @@ CREATE TABLE `products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `brand_id`, `category_id`, `subcategory_id`, `subsubcategory_id`, `product_name_en`, `product_name_bng`, `product_slug_en`, `product_slug_bng`, `product_code`, `product_qty`, `product_tags_en`, `product_tags_bng`, `product_size_en`, `product_size_bng`, `product_color_en`, `product_color_bng`, `selling_price`, `discount_price`, `short_descp_en`, `short_descp_bng`, `long_descp_en`, `long_descp_bng`, `product_thambnail`, `hot_deals`, `featured`, `special_offer`, `special_deals`, `status`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, 1, 2, 'Winter Hoody', 'শীতকালীন হুডি', 'winter-hoody', 'শীতকালীন-হুডি', '619', '100', 'Ipsum,Amet', 'ট্যাগ-1,ট্যাগ-2', 'Small,Medium,Large', 'Small,Medium,Large', 'red,green,blue', 'red,green,blue', '500', '50', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.', '<p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.</p>', '<p>প্রকাশনা এবং গ্রাফিক ডিজাইনে, Lorem ipsum হল একটি স্থানধারক পাঠ্য যা সাধারণত অর্থপূর্ণ বিষয়বস্তুর উপর নির্ভর না করে একটি নথির ভিজ্যুয়াল ফর্ম বা টাইপফেস প্রদর্শন করতে ব্যবহৃত হয়৷ প্রকাশনা এবং গ্রাফিক ডিজাইনে, Lorem ipsum হল একটি স্থানধারক পাঠ্য যা সাধারণত ভিজ্যুয়াল ফর্ম প্রদর্শন করতে ব্যবহৃত হয়৷ অর্থপূর্ণ সামগ্রীর উপর নির্ভর না করে একটি নথি বা টাইপফেসের। প্রকাশনা এবং গ্রাফিক ডিজাইনে, Lorem ipsum হল একটি স্থানধারক পাঠ্য যা সাধারণত অর্থপূর্ণ বিষয়বস্তুর উপর নির্ভর না করে একটি নথি বা টাইপফেসের ভিজ্যুয়াল ফর্ম প্রদর্শন করতে ব্যবহৃত হয়।</p>', 'uploads/products/thambnail/1725842214100399.jpeg', 1, 1, 1, 1, 1, '2022-02-25 06:09:02', '2022-03-01 05:18:40'),
+(2, 3, 1, 1, 2, 'Exercise Shoes', 'ব্যায়াম জুতা', 'exercise-shoes', 'ব্যায়াম-জুতা', '619s', '1200', 'Lorem,Ipsum,Amet', 'ট্যাগ-1,ট্যাগ-2', 'Small,Medium', 'ছোট,মধ্যম,বড়', 'red,green,blue', 'লাল,কালো', '800', '80', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate', 'প্রকাশনা এবং গ্রাফিক ডিজাইনে, হল একটি স্থানধারক পাঠ্য যা সাধারণত প্রদর্শন করতে ব্যবহৃত হয়', '<p>In publishing and graphic <em><u><strong><span style=\"color:#e74c3c\">design</span></strong></u></em>, <a href=\"https://www.facebook.com/\">facebook</a> ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.</p>', 'প্রকাশনা এবং গ্রাফিক ডিজাইনে, একটি স্থানধারক পাঠ্য যা সাধারণত অর্থপূর্ণ বিষয়বস্তুর উপর নির্ভর না করে একটি নথি বা টাইপফেসের ভিজ্যুয়াল ফর্ম প্রদর্শন করতে ব্যবহৃত হয়। চূড়ান্ত অনুলিপি উপলব্ধ হওয়ার আগে একটি স্থানধারক হিসাবে ব্যবহার করা যেতে পারে।\r\n\r\nপ্রকাশনা এবং গ্রাফিক ডিজাইনে, একটি স্থানধারক পাঠ্য যা সাধারণত অর্থপূর্ণ বিষয়বস্তুর উপর নির্ভর না করে একটি নথি বা টাইপফেসের ভিজ্যুয়াল ফর্ম প্রদর্শন করতে ব্যবহৃত হয়। চূড়ান্ত অনুলিপি উপলব্ধ হওয়ার আগে একটি স্থানধারক হিসাবে ব্যবহার করা যেতে পারে।', 'uploads/products/thambnail/1725737291871284.jpeg', 1, NULL, 1, 1, 0, '2022-02-25 06:15:32', '2022-03-01 04:01:20'),
+(4, 6, 1, 1, 1, 'Man\'s T-Shirt', 'পুরুষদের টি-শার্ট', 'man\'s-t-shirt', 'পুরুষদের-টি-শার্ট', '4324', '100', 'Lorem,Ipsum', 'ট্যাগ-2,ট্যাগ-3', 'Small,Medium,Large', 'Small,Medium,Large', 'red,green,blue', 'red,green,blue', '200', '180', 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.', 'প্রকাশনা এবং গ্রাফিক ডিজাইনে, Lorem ipsum হল একটি স্থানধারক পাঠ্য যা সাধারণত অর্থপূর্ণ বিষয়বস্তুর উপর নির্ভর না করে একটি নথি বা টাইপফেসের ভিজ্যুয়াল ফর্ম প্রদর্শন করতে ব্যবহৃত হয়।', '<p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>', '<p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>', 'uploads/products/thambnail/1726096197386698.jpeg', 1, 1, 1, 1, 1, '2022-03-01 05:20:11', '2022-03-01 05:20:11');
 
 -- --------------------------------------------------------
 
@@ -254,7 +278,32 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('i9pHsoZbefd6EgqyR3C5ti7gnv2EMiFIxiLt5a0J', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoidEVPejdhVmc2dWI0T2FqS29XYlBIS2dvdE5mRUxRWkNpY3pIbWNEWCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly9lY29tLXVkZW15LnRlc3QvcHJvZHVjdC9hZGQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRJRXpiU3ZvaGx6ZEFWS2JlWGQ2eWYuby56MmVJY3VLMy93ZUdpV3J0OEovcVJtUVhRQU9HMiI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkSUV6YlN2b2hsemRBVktiZVhkNnlmLm8uejJlSWN1SzMvd2VHaVdydDhKL3FSbVFYUUFPRzIiO30=', 1645723449);
+('Xse8rxiCod1mmYtcvW7V3phZMsfFs2UA6GXurgtU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoiYW1PNXNMUm15emNaUUFvVllwNWdxWDlTOGozcTdveURwRnNrUGdUcCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly9lY29tLXVkZW15LnRlc3QvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkSUV6YlN2b2hsemRBVktiZVhkNnlmLm8uejJlSWN1SzMvd2VHaVdydDhKL3FSbVFYUUFPRzIiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJElFemJTdm9obHpkQVZLYmVYZDZ5Zi5vLnoyZUljdUszL3dlR2lXcnQ4Si9xUm1RWFFBT0cyIjtzOjE5OiJwYXNzd29yZF9oYXNoX2FkbWluIjtzOjYwOiIkMnkkMTAkUy9XaWk5N0tJb21aaDJ5bUxydDZRZXJRNEhrMVExaEpyZDhpYkxWbHJpLzg3SGhHbVkyckciO30=', 1646142703);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `slider_img` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sliders`
+--
+
+INSERT INTO `sliders` (`id`, `slider_img`, `title`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'uploads/slider/1726103568784471.jpg', 'Slider Title', 'Slider Decription', 1, '2022-03-01 06:09:30', '2022-03-01 07:17:21'),
+(2, 'uploads/slider/1726101660094347.jpg', 'titile', NULL, 1, '2022-03-01 06:47:00', '2022-03-01 07:16:28'),
+(4, 'uploads/slider/1726103865706090.jpg', NULL, NULL, 1, '2022-03-01 07:22:04', '2022-03-01 07:22:04');
 
 -- --------------------------------------------------------
 
@@ -357,8 +406,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'User', 'admin@example.com', NULL, NULL, '$2y$10$IEzbSvohlzdAVKbeXd6yf.o.z2eIcuK3/weGiWrt8J/qRmQXQAOG2', NULL, NULL, '0ihYzoKDjQrOIt3OgkOTD7JlNKQk4UDIRdsAZ3mBx2thFviTdXtODiD6J9R1', NULL, '', '2022-02-12 07:14:09', '2022-02-17 13:47:37'),
-(2, 'Ruhul Amin', 'amin@gmail.com', '01245785966', NULL, '$2y$10$IEzbSvohlzdAVKbeXd6yf.o.z2eIcuK3/weGiWrt8J/qRmQXQAOG2', NULL, NULL, 'DodWAvAHlPF0YZFAgzabc9X64BkN7wEyJa4LlPONWio5rRhS70kyVDtdlgXh', NULL, 'uploads/user-images/1645018761img-3.png', '2022-02-15 14:22:32', '2022-02-17 05:20:07');
+(1, 'User', 'admin@example.com', NULL, NULL, '$2y$10$IEzbSvohlzdAVKbeXd6yf.o.z2eIcuK3/weGiWrt8J/qRmQXQAOG2', NULL, NULL, '8cmApBSZ8ppABcjnEqIauiLCEyZQIbLej2qeCsY1vvkHkKfFs6x2MhE4fYsC', NULL, '', '2022-02-12 07:14:09', '2022-02-17 13:47:37'),
+(2, 'Ruhul Amin', 'amin@gmail.com', '01245785966', NULL, '$2y$10$IEzbSvohlzdAVKbeXd6yf.o.z2eIcuK3/weGiWrt8J/qRmQXQAOG2', NULL, NULL, 'HAsOytInGyVUZOVajkfyfSEGYgYSXebNFgZh5T5uC0an9dNz9ZlmTrCy8ygM', NULL, 'uploads/user-images/1645018761img-3.png', '2022-02-15 14:22:32', '2022-02-17 05:20:07'),
+(3, 'sabbir', 'sabbir@gmail.com', '01245785965', NULL, '$2y$10$QD0OqRhno9wU1D8S1zzneOvgu/PnIK8xgkNaLXiOC0e3BsGdqXMWi', NULL, NULL, NULL, NULL, NULL, '2022-02-28 07:17:30', '2022-02-28 07:17:30');
 
 --
 -- Indexes for dumped tables
@@ -431,6 +481,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
@@ -457,13 +513,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -481,13 +537,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `multi_imgs`
 --
 ALTER TABLE `multi_imgs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -499,7 +555,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
@@ -517,7 +579,7 @@ ALTER TABLE `sub_sub_categories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

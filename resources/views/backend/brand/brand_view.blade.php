@@ -3,7 +3,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-	<div class="col-8">
+	<div class="col-lg-8">
 
 		<div class="box">
 			<div class="box-header with-border">
@@ -102,7 +102,7 @@
 	<!-- /.col -->
 
 	<!-- Add Brand Form Here -->
-	<div class="col-4">
+	<div class="col-lg-4">
 
 		<div class="box">
 			<div class="box-header with-border">

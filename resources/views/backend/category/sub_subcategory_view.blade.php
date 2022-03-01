@@ -3,7 +3,7 @@
 <!-- Main content -->
 <section class="content">
   <div class="row">
-	<div class="col-md-8">
+	<div class="col-lg-8">
 
 		<div class="box">
 			<div class="box-header with-border">
@@ -119,7 +119,7 @@
 	<!-- /.col -->
 
 	<!-- Add Category Form Here -->
-	<div class="col-md-4">
+	<div class="col-lg-4">
 		<div class="box">
 			<div class="box-header with-border">
 			  <h3 class="box-title">Add Sub Sub-Category</h3>
