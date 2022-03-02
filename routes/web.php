@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderContoller;
 
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +71,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 
 //===========> All Admin Section Route Here <============
-Route::middleware(['auth:admin'])->group(function(){
+Route::middleware(['auth:sanctum,admin','auth:admin'])->group(function(){
 
     //Admin Brand All Route
     Route::group(['prefix'=>'brand'], function(){
@@ -140,6 +141,14 @@ Route::middleware(['auth:admin'])->group(function(){
 
 });// end Middleware admin
 //===========> End Admin Section Route Here <============
+
+
+
+//===========> Start Frontend All Routes Here <============
+
+// Multi Language All Routes 
+Route::get('/language/bengali', [LanguageController::class, 'Bengali'])->name('bengali.language');
+Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
 
 
 Route::get('/test', function(){
