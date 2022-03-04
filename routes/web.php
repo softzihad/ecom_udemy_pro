@@ -150,6 +150,9 @@ Route::middleware(['auth:sanctum,admin','auth:admin'])->group(function(){
 Route::get('/language/bengali', [LanguageController::class, 'Bengali'])->name('bengali.language');
 Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');
 
+// Product Details
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails'])->name('product.details');
+
 
 Route::get('/test', function(){
     return view('auth.admin_login');

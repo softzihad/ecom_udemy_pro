@@ -9,7 +9,7 @@
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
 <link rel="icon" href="{{ asset('frontend-template/assets/images/star-big-on.png') }}">
-<title>Flipmart premium HTML5 & CSS3 Template</title>
+<title>@yield('title')</title>
 
 <!-- Bootstrap Core CSS -->
 <link rel="stylesheet" href="{{ asset('frontend-template/assets/css/bootstrap.min.css') }}">
