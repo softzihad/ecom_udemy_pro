@@ -28,7 +28,7 @@ class IndexController extends Controller
         $special_deals  = Product::where('special_deals',1)->orderBy('id','DESC')->limit(6)->get();
 
         $skip_category_0 = Category::skip(0)->first();
-        $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
+        $skip_product_0  = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
 
         $skip_category_1 = Category::skip(1)->first();
         $skip_product_1  = Product::where('status',1)->where('category_id',$skip_category_1)->orderBy('id','DESC')->get();
@@ -113,12 +113,77 @@ class IndexController extends Controller
 
 
     /*===========> Product Details Here <===============  */
-
     public function ProductDetails($id,$slug){
 
         $product = Product::find($id);
         $multiImag = MultiImg::where('product_id',$id)->get();
-        return view('frontend.product.product_details',compact('product','multiImag'));
+
+        $color_en = $product->product_color_en;
+        $product_color_en = explode(',', $color_en);
+
+        $color_bng = $product->product_color_bng;
+        $product_color_bng = explode(',', $color_bng);
+
+        $size_en = $product->product_size_en;
+        $product_size_en = explode(',', $size_en);
+
+        $size_bng = $product->product_size_bng;
+        $product_size_bng = explode(',', $size_bng);
+
+        $cat_id = $product->category_id;
+        $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+
+        $hot_deals  = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(6)->get();
+
+        return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_bng','product_size_en','product_size_bng','relatedProduct','hot_deals'));
 
     }
+
+    /*===========> Tag Wise-Product Here <===============  */
+    public function TagWiseProduct($tag){
+
+        //$products = Product::where('status',1)->where('product_tags_en',$tag)->where('product_tags_bng',$tag)->orderBy('id','DESC')->get();
+        $products = Product::where('status',1)->where('product_tags_en',$tag)->orderBy('id','DESC')->paginate(1);
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+
+        return view('frontend.tags.tags_view',compact('products','categories'));
+
+    }
+
+    /*===========> Subcategory Wise-Product Here <===============  */
+    public function SubCatWiseProduct($subcat_id,$slug){
+        $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(1);
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.subcategory_view',compact('products','categories'));
+
+    }
+
+    /*===========> Sub Subcategory Wise-Product Here <===============  */
+    public function SubSubCatWiseProduct($subsubcat_id,$slug){
+        $products = Product::where('status',1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(1);
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        return view('frontend.product.subsubcategory_view',compact('products','categories'));
+
+    }
+
+
+    /*===========> Product View With Ajax <===============  */
+    public function ProductViewAjax($id){
+
+        $product = Product::with('category','brand')->find($id);
+
+        $color = $product->product_color_en;
+        $product_color = explode(',', $color);
+
+        $size = $product->product_size_en;
+        $product_size = explode(',', $size);
+
+        return response()->json(array(
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $product_size,
+
+        ));
+
+    } // end method 
 }

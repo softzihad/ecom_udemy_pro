@@ -174,13 +174,15 @@
 
                           @foreach($subcategories as $subcategory)
                           <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                            <h2 class="title">
-                              @if(session()->get('language') == 'bengali')
-                                {{ $subcategory->subcategory_name_bng }}
-                              @else
-                                {{ $subcategory->subcategory_name_en }}
+                            <a href="{{ route('product.subcategory',['subcat_id'=>$subcategory->id,'slug'=>$subcategory->subcategory_slug_en]) }}">
+                              <h2 class="title">
+                              @if(session()->get('language') == 'bengali') 
+                                {{ $subcategory->subcategory_name_bng }} 
+                              @else 
+                                {{ $subcategory->subcategory_name_en }} 
                               @endif
-                            </h2>
+                              </h2>
+                            </a>
 
                             <!--  Get SubSubCategory Table Data -->
                             @php
@@ -190,7 +192,7 @@
                             @foreach($subsubcategories as $subsubcategory)
                             <ul class="links">
                               <li>
-                                  <a href="#">
+                                  <a href="{{ route('product.subsubcategory',['subsubcat_id'=>$subsubcategory->id,'slug'=>$subsubcategory->subsubcategory_slug_en]) }}">
                                     @if(session()->get('language') == 'bengali')
                                       {{ $subsubcategory->subsubcategory_name_bng }}
                                     @else

@@ -131,10 +131,10 @@
 							<h5>Product Tags <span class="text-warning">(En)</span><span class="text-danger">*</span></h5>
 							<div class="controls">
 								 <input type="text" name="product_tags_en" class="form-control" value="Lorem,Ipsum,Amet" data-role="tagsinput">
-							     @error('product_tags_en') 
+							    @error('product_tags_en') 
 								 <span class="text-danger">{{ $message }}</span>
 								 @enderror
-					 		 </div>
+					 		</div>
 						</div>
 					</div>
 				</div><!-- End 3rd Row Start -->

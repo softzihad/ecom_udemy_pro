@@ -153,6 +153,18 @@ Route::get('/language/english', [LanguageController::class, 'English'])->name('e
 // Product Details
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails'])->name('product.details');
 
+// Frontend Tag wise Data
+Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct'])->name('product.tag');
+
+// Frontend SubCategory wise Data
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct'])->name('product.subcategory');
+
+// Frontend Sub SubCategory wise Data
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct'])->name('product.subsubcategory');
+
+// Product View Modal with Ajax
+Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
 
 Route::get('/test', function(){
     return view('auth.admin_login');

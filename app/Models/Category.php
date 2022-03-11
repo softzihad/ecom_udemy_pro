@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SubCategory;
 
 class Category extends Model
 {
@@ -16,4 +17,9 @@ class Category extends Model
         'category_slug_bng',
         'category_icon',
     ];
+
+    public function subcategories()
+    {
+        return $this->hasMany('App\Models\SubCategory');
+    }
 }
