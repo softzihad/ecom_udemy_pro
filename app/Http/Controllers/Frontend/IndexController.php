@@ -47,10 +47,20 @@ class IndexController extends Controller
 
     public function UserProfile()
     {
-        $id = Auth::user()->id;
+       /* $id = Auth::user()->id;
         $user = User::find($id);
 
-        return view('frontend.profile.user_profile')->with('user',$user);
+        return view('frontend.profile.user_profile')->with('user',$user);*/
+
+        if (Auth::User() == TRUE) {
+          
+            $id = Auth::user()->id;
+            $user = User::find($id);
+
+            return view('frontend.profile.user_profile')->with('user',$user);
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     public function UserProfileUpdate(Request $request)
@@ -116,6 +126,7 @@ class IndexController extends Controller
     public function ProductDetails($id,$slug){
 
         $product = Product::find($id);
+        $productDetails = Product::find($id);
         $multiImag = MultiImg::where('product_id',$id)->get();
 
         $color_en = $product->product_color_en;
@@ -135,7 +146,7 @@ class IndexController extends Controller
 
         $hot_deals  = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(6)->get();
 
-        return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_bng','product_size_en','product_size_bng','relatedProduct','hot_deals'));
+        return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_bng','product_size_en','product_size_bng','relatedProduct','hot_deals','productDetails'));
 
     }
 

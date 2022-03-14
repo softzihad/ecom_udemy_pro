@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Darryldecode\Cart\CartServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
 
     ],
 
@@ -193,7 +195,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        
+          'Cart' => Darryldecode\Cart\Facades\CartFacade::class
 
     ])->toArray(),
 

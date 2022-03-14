@@ -154,7 +154,7 @@
 				</div>
 			</div><!-- /.sidebar -->
 	<div class='col-md-9'>
-	    <div class="detail-block">
+	  <div class="detail-block">
 			<div class="row  wow fadeInUp">
 	                
 				 <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
@@ -181,7 +181,7 @@
 				                        <img class="img-responsive" width="85" alt="" src="{{ asset($img->photo_name ) }}" data-echo="{{ asset($img->photo_name ) }}" />
 				                    </a>
 				                </div>
-				                @endforeach
+				              @endforeach
 
 				            </div><!-- /#owl-single-product-thumbnails -->
 				        </div><!-- /.gallery-thumbs -->
@@ -189,11 +189,11 @@
 				</div><!-- /.gallery-holder -->        			
 				<div class='col-sm-6 col-md-7 product-info-block'>
 					<div class="product-info">
-						<h1 class="name">
+						<h1 class="name" id="pname">
 							@if(session()->get('language') == 'bengali')
-								{{ $product->product_name_bng }}
+								{{ $productDetails->product_name_bng }}
 							@else
-								{{ $product->product_name_en }}
+								{{ $productDetails->product_name_en }}
 							@endif
 						</h1>
 						
@@ -227,9 +227,9 @@
 
 						<div class="description-container m-t-20">
 							@if(session()->get('language') == 'bengali')
-								{{ $product->short_descp_bng }}
+								{{ $productDetails->short_descp_bng }}
 							@else
-								{{ $product->short_descp_en }}
+								{{ $productDetails->short_descp_en }}
 							@endif
 						</div><!-- /.description-container -->
 
@@ -238,12 +238,12 @@
 
 								<div class="col-sm-6">
 									<div class="price-box">
-										@if ($product->discount_price == NULL)
-				                          <div class="product-price"> <span class="price"> &#2547; {{ $product->selling_price }} </span>  </div>
-				                        @else
-				                          <div class="product-price"> <span class="price"> &#2547; {{ $product->discount_price }} </span> <span class="price-strike">&#2547;  {{ $product->selling_price }}</span> </div>
-				                        @endif
-				                        <!-- /.product-price -->
+										@if ($productDetails->discount_price == NULL)
+                      <div class="product-price"> <span class="price"> &#2547; {{ $productDetails->selling_price }} </span>  </div>
+                    @else
+                      <div class="product-price"> <span class="price"> &#2547; {{ $productDetails->discount_price }} </span> <span class="price-strike">&#2547;  {{ $productDetails->selling_price }}</span> </div>
+                    @endif
+                    <!-- /.product-price -->
 									</div>
 								</div>
 
@@ -267,8 +267,8 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label class="info-title control-label">Choose Color <span>*</span></label>
-										<select class="form-control unicase-form-control selectpicker">
-											<option>--Choose Color--</option>
+										<select class="form-control unicase-form-control selectpicker" id="color">
+											<option selected="" disabled="">--Choose Color--</option>
 											@if(session()->get('language') == 'bengali')
 												@foreach($product_color_bng as $color)
 												<option>{{ ucwords($color) }}</option>
@@ -283,10 +283,14 @@
 								</div>
 
 								<div class="col-sm-6">
+									
 									<div class="form-group">
+										@if($productDetails->product_size_en === null)
+
+										@else
 										<label class="info-title control-label">Choose Size <span>*</span></label>
-										<select class="form-control unicase-form-control selectpicker">
-											<option>--Choose Size--</option>
+										<select class="form-control unicase-form-control selectpicker" id="size">
+											<option value="" selected="" disabled="">--Choose Size--</option>
 											@if(session()->get('language') == 'bengali')
 												@foreach($product_size_bng as $size)
 												<option>{{ ucwords($size) }}</option>
@@ -298,6 +302,7 @@
 											@endif
 										</select>
 									</div><!-- end form group -->
+									@endif
 								</div>
 							</div><!-- /.row -->
 						</div><!-- /.price-container -->
@@ -312,32 +317,29 @@
 								<div class="col-sm-2">
 									<div class="cart-quantity">
 										<div class="quant-input">
-							                <div class="arrows">
-							                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-							                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
-							                </div>
-							                <input type="text" value="1">
-						              </div>
-						            </div>
+					                <div class="arrows">
+					                  <div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+					                  <div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+					                </div>
+					                <input type="text" value="1" id="qty" value="1" min="1">
+				              </div>
+				            </div>
 								</div>
 
+								<input type="hidden" id="product_id" value="{{ $productDetails->id }}" min="1">
+
 								<div class="col-sm-7">
-									<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+									<button type="submit" onclick="addToCart()" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
 								</div>
 
 								
 							</div><!-- /.row -->
 						</div><!-- /.quantity-container -->
-
-						
-
-						
-
 						
 					</div><!-- /.product-info -->
 				</div><!-- /.col-sm-7 -->
 			</div><!-- /.row -->
-	    </div>
+	  </div>
 				
 		<div class="product-tabs inner-bottom-xs  wow fadeInUp">
 			<div class="row">
@@ -356,9 +358,9 @@
 							<div class="product-tab">
 								<p class="text">
 									@if(session()->get('language') == 'bengali')
-										{!! $product->long_descp_bng !!}
+										{!! $productDetails->long_descp_bng !!}
 									@else
-										{!! $product->long_descp_en !!}
+										{!! $productDetails->long_descp_en !!}
 									@endif
 								</p>
 							</div>	
@@ -496,74 +498,74 @@
 			</div><!-- /.row -->
 		</div><!-- /.product-tabs -->
 
-				<!-- ============================================== UPSELL PRODUCTS ============================================== -->
-<section class="section featured-product wow fadeInUp">
-	<h3 class="section-title">upsell products</h3>
-	<div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
-	  @foreach($relatedProduct as $product)	
-		<div class="item item-carousel">
-			<div class="products">
-				<div class="product">		
-					<div class="product-image">
-						<div class="image">
-							<a href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
-						</div><!-- /.image -->
-						<div class="tag sale"><span>sale</span></div>            		   
-					</div><!-- /.product-image -->
-						
-					
-					<div class="product-info text-left">
-						<h3 class="name">
-							<a href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}">
-								@if(session()->get('language') == 'bengali')
-                  {{ $product->product_name_bng }}
-                @else
-                  {{ $product->product_name_en }}
-                @endif
-							</a>
-						</h3>
-						<div class="rating rateit-small"></div>
-						<div class="description"></div>
+		<!-- ============ UPSELL PRODUCTS ============ -->
+		<section class="section featured-product wow fadeInUp">
+			<h3 class="section-title">upsell products</h3>
+			<div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
+			  @foreach($relatedProduct as $product)	
+				<div class="item item-carousel">
+					<div class="products">
+						<div class="product">		
+							<div class="product-image">
+								<div class="image">
+									<a href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}"><img  src="{{ asset($product->product_thambnail) }}" alt=""></a>
+								</div><!-- /.image -->
+								<div class="tag sale"><span>sale</span></div>            		   
+							</div><!-- /.product-image -->
+								
+							
+							<div class="product-info text-left">
+								<h3 class="name">
+									<a href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}">
+										@if(session()->get('language') == 'bengali')
+		                  {{ $product->product_name_bng }}
+		                @else
+		                  {{ $product->product_name_en }}
+		                @endif
+									</a>
+								</h3>
+								<div class="rating rateit-small"></div>
+								<div class="description"></div>
 
-						@if ($product->discount_price == NULL)
-              <div class="product-price"> <span class="price"> &#2547; {{ $product->selling_price }} </span>  </div>
-            @else
-              <div class="product-price"> <span class="price"> &#2547; {{ $product->discount_price }} </span> <span class="price-before-discount">&#2547;  {{ $product->selling_price }}</span> </div>
-            @endif<!-- /.product-price -->
-					</div><!-- /.product-info -->
+								@if ($product->discount_price == NULL)
+		              <div class="product-price"> <span class="price"> &#2547; {{ $product->selling_price }} </span>  </div>
+		            @else
+		              <div class="product-price"> <span class="price"> &#2547; {{ $product->discount_price }} </span> <span class="price-before-discount">&#2547;  {{ $product->selling_price }}</span> </div>
+		            @endif<!-- /.product-price -->
+							</div><!-- /.product-info -->
 
-						<div class="cart clearfix animate-effect">
-							<div class="action">
-								<ul class="list-unstyled">
-									<li class="add-cart-button btn-group">
-										<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
-											<i class="fa fa-shopping-cart"></i>													
-										</button>
-										<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
-																
-									</li>
-				                   
-					                <li class="lnk wishlist">
-										<a class="add-to-cart" href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}" title="Wishlist">
-											 <i class="icon fa fa-heart"></i>
-										</a>
-									</li>
+								<div class="cart clearfix animate-effect">
+									<div class="action">
+										<ul class="list-unstyled">
+											<li class="add-cart-button btn-group">
+												<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
+													<i class="fa fa-shopping-cart"></i>													
+												</button>
+												<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+																		
+											</li>
+						                   
+							                <li class="lnk wishlist">
+												<a class="add-to-cart" href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}" title="Wishlist">
+													 <i class="icon fa fa-heart"></i>
+												</a>
+											</li>
 
-									<li class="lnk">
-										<a class="add-to-cart" href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}" title="Compare">
-										    <i class="fa fa-signal"></i>
-										</a>
-									</li>
-								</ul>
-							</div><!-- /.action -->
-						</div><!-- /.cart -->
-				</div><!-- /.product -->
-			</div><!-- /.products -->
-		</div><!-- /.item -->
-		@endforeach
-	</div><!-- /.home-owl-carousel -->
-</section><!-- /.section -->
-<!-- ============================================== UPSELL PRODUCTS : END ============================================== -->
+											<li class="lnk">
+												<a class="add-to-cart" href="{{ route('product.details',['id'=>$product->id, 'slug'=>$product->product_slug_en]) }}" title="Compare">
+												    <i class="fa fa-signal"></i>
+												</a>
+											</li>
+										</ul>
+									</div><!-- /.action -->
+								</div><!-- /.cart -->
+						</div><!-- /.product -->
+					</div><!-- /.products -->
+				</div><!-- /.item -->
+				@endforeach
+			</div><!-- /.home-owl-carousel -->
+		</section><!-- /.section -->
+		<!-- ============= UPSELL PRODUCTS : END ============ -->
 			
 	</div><!-- /.col -->
 	<div class="clearfix"></div>

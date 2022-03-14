@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\SliderContoller;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,13 +45,7 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', f
     return view('admin.index');
 })->name('admin.dashboard')->middleware('auth:admin');
 
-//Admin All Route Here....
-Route::get('/admin/logout', 'AdminController@destroy')->name('admin.logout');
-Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
-Route::get('/admin/profile/edit', [AdminProfileController::class, 'AdminProfileEdit'])->name('admin.profile.edit');
-Route::post('/admin/profile/update', [AdminProfileController::class, 'AdminProfileupdate'])->name('admin.profile.update');
-Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
-Route::post('/admin/change/password/update', [AdminProfileController::class, 'AdminChangePasswordUpdate'])->name('admin.change.password.update');
+
 
 //User All Route Here....
 Route::get('/', [IndexController::class, 'index']);
@@ -72,6 +67,14 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 //===========> All Admin Section Route Here <============
 Route::middleware(['auth:sanctum,admin','auth:admin'])->group(function(){
+
+    //Admin All Route Here....
+    Route::get('/admin/logout', 'AdminController@destroy')->name('admin.logout');
+    Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
+    Route::get('/admin/profile/edit', [AdminProfileController::class, 'AdminProfileEdit'])->name('admin.profile.edit');
+    Route::post('/admin/profile/update', [AdminProfileController::class, 'AdminProfileupdate'])->name('admin.profile.update');
+    Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChangePassword'])->name('admin.change.password');
+    Route::post('/admin/change/password/update', [AdminProfileController::class, 'AdminChangePasswordUpdate'])->name('admin.change.password.update');
 
     //Admin Brand All Route
     Route::group(['prefix'=>'brand'], function(){
@@ -164,6 +167,13 @@ Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::cl
 
 // Product View Modal with Ajax
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
+
+// Add to Cart Store Data
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+// Get Data from mini cart
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
+Route::get('/product/mini/destroy', [CartController::class, 'AddMiniCartDestroy']);
+Route::get('/minicart/product-remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 
 
 Route::get('/test', function(){
