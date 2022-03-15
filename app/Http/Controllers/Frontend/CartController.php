@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Auth;
+use App\Models\User;
+use App\Models\Wishlist;
+use Carbon\Carbon;
 
 class CartController extends Controller
 {
@@ -70,4 +74,30 @@ class CartController extends Controller
       return response()->json(['success' => 'Product Remove from Cart']);
 
     } // end mehtod 
+
+
+    /*=============> add to wishlist mehtod <===========*/
+    public function AddToWishlist(Request $request, $product_id){
+
+      if (Auth::check()) {
+        
+        $exists = Wishlist::where('user_id',Auth::id())->where('product_id',$product_id)->first();
+
+        if (!$exists) {
+               Wishlist::create([
+                'user_id' => Auth::user()->id, 
+                'product_id' => $product_id, 
+                'created_at' => Carbon::now(), 
+            ]);
+           return response()->json(['success' => 'Successfully Added On Your Wishlist']);
+        }else{
+          return response()->json(['error' => 'This Product Has Already On Your Wishlist']);
+        }
+
+      }else{
+        return response()->json(['error' => 'At First Login Your Account']);
+      }
+      
+
+    }
 }

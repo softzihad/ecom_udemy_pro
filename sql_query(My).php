@@ -10,5 +10,10 @@
     $tags_bng = App\Models\Product::groupBy('product_tags_bng')->select('product_tags_bng')->get();
 
     $relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+
+    <!-- where product is belongsTo relationship -->
+    $Wishlist = Wishlist::with('product')->where('user_id',Auth::id())->latest()->get();
+
+    Wishlist::where('user_id',Auth::id())->where('id',$id)->delete();
 </body>
 </html>
