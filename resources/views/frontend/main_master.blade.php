@@ -285,10 +285,10 @@
                   var itemTotalPrice = value.price*value.quantity
                     miniCart += `<div class="cart-item product-summary">
                   <div class="row">
-                    <div class="col-xs-4">
-                      <div class="image"> <a href="detail.html"><img src="/${value.attributes.image}" alt="" style="height: 60px; width: 53px;"></a> </div>
+                    <div class="col-xs-3">
+                      <div class="image"> <a href="detail.html"><img src="/${value.attributes.image}" alt="" style="height: 60px; width: 48px;"></a> </div>
                     </div>
-                    <div class="col-xs-7">
+                    <div class="col-xs-8">
                       <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
                       <div class="price">${value.price} x ${value.quantity}</div>
                       <div class="price"><span class="text">Total : </span><span class="sign">&#2547; </span>${itemTotalPrice}</div>
@@ -388,7 +388,7 @@
   <!-- ==========> Load Wish List Data <========= -->
   <script type="text/javascript">
     
-     function wishlist(){
+    function wishlist(){
         $.ajax({
             type: 'GET',
             url: '/user/get-wishlist-product',
@@ -425,7 +425,7 @@
                 $('#wishlist').html(rows)
             }
         })
-     }
+    }
 
     wishlist();
 
@@ -463,6 +463,161 @@
         });
     }
     //  end Wish List remove
+  </script>
+
+  <!-- ==========> Load MyCart Data <========= -->
+  <script type="text/javascript">
+    
+     function cart(){
+        $.ajax({
+            type: 'GET',
+            url: '/get-cart-product',
+            dataType:'json',
+            success:function(response){
+                //console.log(response)
+                var rows = ""
+
+                $.each(response.carts, function(key,value){
+                  var itemTotalPrice = value.price*value.quantity
+
+                  rows += `<tr>
+                  <td class="col-md-2">
+                    <img src="/${value.attributes.image}" style="width:60px; height:60px;">
+                  </td>
+
+                  <td class="col-md-2">
+                    <div class="product-name"><a href="#">${value.name}</a></div>
+                    <div class="price">&#2547; ${value.price}</div>
+                  </td>
+
+                  <td class="col-md-2">
+                    <strong>${value.attributes.color} </strong> 
+                  </td>
+
+                  <td class="col-md-2">
+                    ${value.attributes.size == null
+                      ? `<span> .... </span>`
+                      :
+                    `<strong>${value.attributes.size} </strong>` 
+                    }           
+                  </td>
+
+                  <td class="col-md-2">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="cartDecrement(${value.id})" >-</button>     
+                    <input type="text" value="${value.quantity}" min="1" max="100" disabled="" style="width:25px;" >      
+                    <button type="submit" class="btn btn-success btn-sm" id="${value.id}" onclick="cartIncrement(this.id)" >+</button>  
+                  </td>
+
+                  <td class="col-md-2">
+                    <strong>&#2547; ${itemTotalPrice}</strong>
+                  </td>
+
+                  <td class="col-md-1 close-btn">
+                    <button type="submit" onclick="cartRemove(${value.id})" class=""><i class="fa fa-times"></i></button>
+                  </td>
+                </tr>`
+                });
+                
+                $('#cartPage').html(rows)
+            }
+        })
+     }
+
+    cart();
+
+    /*==========> Cart remove Start <=========*/
+    function cartRemove(id){
+        $.ajax({
+            type: 'GET',
+            url: '/cart-remove/'+id,
+            dataType:'json',
+            success:function(data){
+              cart();
+              miniCart();
+
+              // Start Message 
+              const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
+              if ($.isEmptyObject(data.error)) {
+                  Toast.fire({
+                      type: 'success',
+                      title: data.success
+                  })
+              } // End Message 
+
+            }
+        });
+    }
+    //  end Cart remove
+  </script>
+
+  <!-- ==========> CART Product INCREMENT && DECREMENT <========= -->
+  <script type="text/javascript">
+
+    function cartIncrement(id){
+        $.ajax({
+            type: 'GET',
+            url: '/cart-increment/'+id,
+            dataType:'json',
+            success:function(data){
+              cart();
+              miniCart();
+
+              // Start Message 
+              const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
+
+              if ($.isEmptyObject(data.error)) {
+                  Toast.fire({
+                      type: 'success',
+                      title: data.success
+                  })
+              } // End Message 
+
+            }
+        });
+    }
+    //  end Cart Increment
+
+    function cartDecrement(id){
+        $.ajax({
+            type: 'GET',
+            url: '/cart-decrement/'+id,
+            dataType:'json',
+            success:function(data){
+              cart();
+              miniCart();
+
+              // Start Message 
+              const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
+
+              if ($.isEmptyObject(data.error)) {
+                  Toast.fire({
+                      type: 'success',
+                      title: data.success
+                  })
+              } // End Message 
+
+            }
+        });
+    }
+    //  end Cart Decrement
   </script>
 
 </body>
