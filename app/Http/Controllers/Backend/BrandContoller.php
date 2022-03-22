@@ -100,7 +100,5 @@ class BrandContoller extends Controller
 
         Session::flash('info', 'Brand Deleted Successfully');
         return redirect()->route('all.brand');
-
-
     }
 }

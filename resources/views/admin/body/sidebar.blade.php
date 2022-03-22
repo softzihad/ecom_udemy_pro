@@ -23,14 +23,14 @@
 		  
   		  <li class="{{ ($route == 'admin.dashboard') ? 'active' : '' }}">
           <a href="{{ route('admin.dashboard') }}">
-            <i data-feather="pie-chart"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
 			       <span>Dashboard</span>
           </a>
         </li>  
 		
         <li class="treeview {{ ($prefix == '/brand') ? 'active' : '' }}">
           <a href="#">
-            <i data-feather="message-circle"></i>
+            <i class="fa fa-ravelry"></i>
             <span>Brands</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -44,7 +44,7 @@
 		  
         <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}">
           <a href="#">
-            <i data-feather="mail"></i> <span>Cetegory</span>
+            <i class="fa fa-sitemap"></i> <span>Cetegory</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
@@ -71,16 +71,44 @@
         </li> 
         <li class="treeview {{ $prefix == '/slider' ? 'active' : '' }}">
           <a href="#">
-            <i class="fa fa-slideshare" aria-hidden="true"></i>
+            <i class="fa fa-picture-o" aria-hidden="true"></i>
             <span>Slider</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ ($route == 'add.slider') ? 'active' : '' }}"><a href="{{ route('manage.slider') }}"><i class="ti-more"></i>Manage Slider</a></li>
+            <li class="{{ ($route == 'manage.slider') ? 'active' : '' }}"><a href="{{ route('manage.slider') }}"><i class="ti-more"></i>Manage Slider</a></li>
           </ul>
-        </li> 		  
+        </li> 	
+        <li class="treeview {{ $prefix == '/coupon' ? 'active' : '' }}">
+          <a href="#">
+            <i class="fa fa-free-code-camp fa-5x" aria-hidden="true"></i>
+            <span>Coupons</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'manage.coupon') ? 'active' : '' }}"><a href="{{ route('manage.coupon') }}"><i class="ti-more"></i>Manage Coupons</a></li>
+          </ul>
+        </li>	
+        <li class="treeview {{ $prefix == '/shipping' ? 'active' : '' }}">
+          <a href="#">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <span>Shipping Area</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{{ ($route == 'manage.division') ? 'active' : '' }}"><a href="{{ route('manage.division') }}"><i class="ti-more"></i>Ship Division</a></li>
+
+            <li class="{{ ($route == 'manage.district') ? 'active' : '' }}"><a href="{{ route('manage.district') }}"><i class="ti-more"></i>Ship District</a></li>
+
+            <li class="{{ ($route == 'manage.upazila') ? 'active' : '' }}"><a href="{{ route('manage.upazila') }}"><i class="ti-more"></i>Ship Upazila</a></li>
+          </ul>
+        </li>   
 		 
         <li class="header nav-small-cap">User Interface</li>
 		  

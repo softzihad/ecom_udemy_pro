@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{ asset('backend-admin/images/favicon.ico') }}">
 
-    <title>My Shop - Dashboard</title>
+    <title>@yield('title')</title>
     
   	<!-- Vendors Style-->
   	<link rel="stylesheet" href="{{ asset('backend-admin/css/vendors_css.css') }}">

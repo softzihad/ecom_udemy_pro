@@ -294,7 +294,7 @@
                       <div class="price"><span class="text">Total : </span><span class="sign">&#2547; </span>${itemTotalPrice}</div>
                     </div>
                     <div class="col-xs-1 action"> 
-                      <button type="submit" id="${value.id}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button> 
+                      <button type="submit" id="${value.id}" onclick="miniCartRemove(this.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button> 
                     </div>
                   </div>
                 </div>

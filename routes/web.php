@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderContoller;
+use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -131,7 +133,7 @@ Route::middleware(['auth:sanctum,admin','auth:admin'])->group(function(){
         Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
     });// end Route Group
 
-    //Admin Brand All Route
+    //Admin Slider All Route
     Route::group(['prefix'=>'slider'], function(){
 
         Route::get('/view', [SliderContoller::class, 'SliderView'])->name('manage.slider');
@@ -143,6 +145,45 @@ Route::middleware(['auth:sanctum,admin','auth:admin'])->group(function(){
         Route::get('/active/{id}', [SliderContoller::class, 'SliderActive'])->name('slider.active');
 
     });// end Route Group
+
+    
+    // Admin Coupons All Routes 
+    Route::prefix('coupon')->group(function(){
+
+        Route::get('/view', [CouponController::class, 'CouponView'])->name('manage.coupon');
+        Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
+        Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
+        Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
+
+
+    });// end Route Group
+
+
+    // Admin Shipping All Routes 
+    Route::prefix('shipping')->group(function(){
+
+        /* Division */
+        Route::get('/division/view', [ShippingAreaController::class, 'DivisionView'])->name('manage.division');
+        Route::post('/division/store', [ShippingAreaController::class, 'DivisionStore'])->name('division.store');
+        Route::post('/division/update/{id}', [ShippingAreaController::class, 'DivisionUpdate'])->name('division.update');
+        Route::get('/division/delete/{id}', [ShippingAreaController::class, 'DivisionDelete'])->name('division.delete');
+
+        /* District */
+        Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage.district');
+        Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
+        Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
+        Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+
+        /* Upazila */
+        Route::get('/upazila/view', [ShippingAreaController::class, 'UpazilaView'])->name('manage.upazila');
+        Route::get('/division/district/ajax/{division_id}', [ShippingAreaController::class, 'GetDistrict']);
+
+        Route::post('/upazila/store', [ShippingAreaController::class, 'UpazilaStore'])->name('upazila.store');
+        Route::post('/upazila/update/{id}', [ShippingAreaController::class, 'UpazilaUpdate'])->name('upazila.update');
+        Route::get('/upazila/delete/{id}', [ShippingAreaController::class, 'UpazilaDelete'])->name('upazila.delete');
+
+    });
+
 
 });// end Middleware admin
 //===========> End Admin Section Route Here <============

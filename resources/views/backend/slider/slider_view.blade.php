@@ -50,12 +50,12 @@
 
 							 </td>
 							<td width="30%">
-								<a href="" class="btn btn-info btn-md" data-toggle="modal" data-target="#editModal{{ $slider->id }}"><i class="fa fa-pencil"></i></a>
-								<a href="{{ route('slider.delete', ['id' => $slider->id]) }}" class="btn btn-danger btn-md" id="delete"><i class="fa fa-trash"></i></a>
+								<a href="" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal{{ $slider->id }}"><i class="fa fa-pencil"></i></a>
+								<a href="{{ route('slider.delete', ['id' => $slider->id]) }}" class="btn btn-danger btn-sm" id="delete"><i class="fa fa-trash"></i></a>
 								@if($slider->status == 1)
-									<a href="{{ route('slider.inactive',$slider->id) }}" class="btn btn-danger btn-md" title="Inactive Now"><i class="fa fa-arrow-down"></i> </a>
+									<a href="{{ route('slider.inactive',$slider->id) }}" class="btn btn-danger btn-sm" title="Inactive Now"><i class="fa fa-arrow-down"></i> </a>
 								@else
-									<a href="{{ route('slider.active',$slider->id) }}" class="btn btn-success btn-md" title="Active Now"><i class="fa fa-arrow-up"></i> </a>
+									<a href="{{ route('slider.active',$slider->id) }}" class="btn btn-success btn-sm" title="Active Now"><i class="fa fa-arrow-up"></i> </a>
 								@endif
 							</td>
 						</tr>
