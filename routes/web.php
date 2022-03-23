@@ -238,6 +238,12 @@ Route::get('/cart-increment/{rowId}', [CartPageController::class, 'CartIncrement
 Route::get('/cart-decrement/{rowId}', [CartPageController::class, 'CartDecrement']);
 
 
+// Apply Coupon Routes
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
 //===========> End Frontend All Routes Here <============
 
 
