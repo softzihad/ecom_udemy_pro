@@ -12,6 +12,7 @@ use App\Models\Wishlist;
 use Carbon\Carbon;
 use App\Models\Coupon;
 use Illuminate\Support\Facades\Session;
+use App\Models\ShipDivision;
 
 class CartController extends Controller
 {
@@ -131,9 +132,9 @@ class CartController extends Controller
     /*=============> Coupon Calculation mehtod <===========*/
     public function CouponCalculation(){
 
-      $total = Cart::getTotal();
+      //$total = Cart::getTotal();
 
-      if($total == 0){
+      if(Cart::getTotal() == 0){
         return response()->json(['zero' => 0]);
       }
 
@@ -161,6 +162,38 @@ class CartController extends Controller
     public function CouponRemove(){
         Session::forget('coupon');
         return response()->json(['success' => 'Coupon Remove Successfully']);
+    }
+
+
+
+
+    /*=============> Coupon Calculation mehtod <===========*/
+    public function CheckoutCreate()
+    {
+
+      if (Auth::check()) {
+        
+         if (Cart::getTotal() > 0) {
+
+            $carts = Cart::getContent();
+            $cartQty = Cart::getTotalQuantity();
+            $cartTotal = Cart::getTotal();
+
+            $divisions = ShipDivision::orderBy('division_name','ASC')->get();
+
+            return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
+
+        }else{
+            Session::flash('error', 'Shopping At list One Product');
+            return redirect()->to('/');
+        }
+
+      }else{
+
+        Session::flash('error', 'You Need To Login First');
+        return redirect()->route('login');
+      }
+
     }
 
 

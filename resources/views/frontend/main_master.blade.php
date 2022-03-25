@@ -35,6 +35,9 @@
 <!-- Toastr -->
 <link rel="stylesheet" href="{{ asset('backend-admin/css/toastr.min.css') }}">
 
+<!-- Jquery --> <!-- Also Using For Ajax -->
+<script src="{{ asset('frontend-template/assets/js/jquery-3.6.0.min.js') }}"></script>
+
 </head>
 <body class="cnt-home">
 <!-- ============================================== HEADER ============================================== -->
@@ -53,7 +56,8 @@
 <!-- For demo purposes – can be removed on production : End --> 
 
 <!-- JavaScripts placed at the end of the document so the pages load faster --> 
-<script src="{{ asset('frontend-template/assets/js/jquery-1.11.1.min.js') }}"></script> 
+
+<!-- <script src="{{ asset('frontend-template/assets/js/jquery-1.11.1.min.js') }}"></script>  -->
 <script src="{{ asset('frontend-template/assets/js/bootstrap.min.js') }}"></script> 
 <script src="{{ asset('frontend-template/assets/js/bootstrap-hover-dropdown.min.js') }}"></script> 
 <script src="{{ asset('frontend-template/assets/js/owl.carousel.min.js') }}"></script> 

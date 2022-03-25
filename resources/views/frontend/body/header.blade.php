@@ -9,7 +9,9 @@
             <li><a href="#"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'bengali') অ্যাকাউন্ট @else My Account @endif</a></li>
             <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>@if(session()->get('language') == 'bengali') ইচ্ছেতালিকা @else Wishlist @endif</a></li>
             <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>@if(session()->get('language') == 'bengali') আমার কার্ট @else My Cart @endif</a></li>
-            <li><a href="#"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'bengali') চেকআউট @else Checkout @endif</a></li>
+            @if(Auth::check())
+              <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>@if(session()->get('language') == 'bengali') চেকআউট @else Checkout @endif</a></li>
+            @endif
             <li>
               @auth
                 <a href="{{ route('dashboard') }}"><i class="icon fa fa-user"></i>@if(session()->get('language') == 'bengali') প্রোফাইল @else User Profile @endif </a>
