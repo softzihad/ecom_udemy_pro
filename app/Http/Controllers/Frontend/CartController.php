@@ -173,7 +173,7 @@ class CartController extends Controller
 
       if (Auth::check()) {
         
-         if (Cart::getTotal() > 0) {
+        if (Cart::getTotal() > 0) {
 
             $carts = Cart::getContent();
             $cartQty = Cart::getTotalQuantity();

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShipDistrict;
 use App\Models\ShipUpazila;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class CheckoutController extends Controller
 {
@@ -33,17 +34,18 @@ class CheckoutController extends Controller
         $data['post_code'] = $request->post_code;
         $data['division_id'] = $request->division_id;
         $data['district_id'] = $request->district_id;
-        $data['state_id'] = $request->state_id;
+        $data['upazila_id'] = $request->upazila_id;
         $data['notes'] = $request->notes;
+        $cartTotal = Cart::getTotal();
 
 
         if ($request->payment_method == 'stripe') {
-            return view('frontend.payment.stripe',compact('data'));
+            return view('frontend.payment.stripe',compact('data','cartTotal'));
         }elseif ($request->payment_method == 'card') {
             return 'card';
         }else{
             return 'cash';
         }
-        
+
     }// end mehtod. 
 }

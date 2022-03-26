@@ -38,6 +38,9 @@
 <!-- Jquery --> <!-- Also Using For Ajax -->
 <script src="{{ asset('frontend-template/assets/js/jquery-3.6.0.min.js') }}"></script>
 
+<!-- Stripe Js -->
+<script src="https://js.stripe.com/v3/"></script>
+
 </head>
 <body class="cnt-home">
 <!-- ============================================== HEADER ============================================== -->

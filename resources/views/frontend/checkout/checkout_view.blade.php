@@ -107,7 +107,7 @@ Checkout
 											</div> <!-- // end form group -->
 
 											<div class="form-group">
-										 		<label class="info-title" for="exampleInputEmail1">Notes <span>*</span></label>
+										 		<label class="info-title" for="exampleInputEmail1">Notes <span>(Optional)</span></label>
 										    <textarea class="form-control" cols="30" rows="5" placeholder="Notes" name="notes"></textarea>
 										  </div>  <!-- // end form group  -->
 											
@@ -142,7 +142,7 @@ Checkout
 
 										<li> 
 											<strong>Qty: </strong>
-											  ( {{ Cart::getTotalQuantity() }} )
+											  ( {{ $item->quantity }} )
 
 											 <strong>Color: </strong>
 											 {{ $item->attributes->color }}
