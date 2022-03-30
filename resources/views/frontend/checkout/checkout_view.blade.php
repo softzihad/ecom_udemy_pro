@@ -57,7 +57,7 @@ Checkout
 
 												<div class="form-group">
 												    <label class="info-title" for="exampleInputEmail1">Post Code <span>*</span></label>
-												    <input type="text" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="">
+												    <input type="number" name="post_code" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Post Code" required="">
 												</div>  <!-- // end form group  -->
 											
 										</div>	
@@ -206,7 +206,7 @@ Checkout
 						    	<div class="col-md-4">
 						    		<label for="">Cash</label> 		
 				       			<input type="radio" name="payment_method" value="cash">	
-						  			<img src="{{ asset('frontend-template/assets/images/payments/2.png') }}">  		
+						  			<img src="{{ asset('frontend-template/assets/images/payments/6.png') }}">  		
 						    	</div> <!-- end col md 4 -->
 								</div> <!-- // end row  -->
 								<hr>
