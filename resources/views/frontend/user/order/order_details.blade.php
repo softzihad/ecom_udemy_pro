@@ -152,7 +152,7 @@ Order Details
                   </td>
 
                   <td class="col-md-2">
-                    <label for=""> Total Price </label>
+                    <label for=""> Total Price {{ public_path() }} </label>
                   </td>
 
                 </tr>
@@ -199,6 +199,16 @@ Order Details
           </div>
          </div> <!-- / end col md 8 -->
       </div> <!-- // END ORDER ITEM ROW -->
+
+      @if($order->status == 'delivered')
+
+      @else
+      <div class="form-group">
+        <label for="label">Order Return Reason:</label>
+        <textarea name="return_reason" id="" cols="30" rows="5" class="form-control"></textarea>
+      </div>
+      @endif
+
 
 		</div><!-- / end Row -->
 

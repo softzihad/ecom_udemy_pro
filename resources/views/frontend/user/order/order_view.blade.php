@@ -69,7 +69,7 @@ Orders
 
 				        <td>
 				          <a href="{{ route('order_details', ['order_id' => $order->id]) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
-				          <a href="" class="btn btn-sm btn-danger"><i class="fa fa-download" style="color: white;"></i> Invoice </a>
+				          <a href="{{ route('invoice_download', ['order_id' => $order->id]) }}" target="_blank" class="btn btn-sm btn-danger"><i class="fa fa-download" style="color: white;"></i> Invoice </a>
 				        </td>
               </tr>
               @endforeach

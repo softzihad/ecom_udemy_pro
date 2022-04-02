@@ -168,7 +168,7 @@ return [
          * Package Service Providers...
          */
         Darryldecode\Cart\CartServiceProvider::class,
-
+        
         /*
          * Application Service Providers...
          */
